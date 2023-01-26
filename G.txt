@@ -1,0 +1,22 @@
+1. 
+
+CPU:ns instruktionscykel kallas processen där CPU:n exekverar instruktioner. Detta är en process som sker i fyra steg som består av hämtning, avkodning, exekvering och 
+återskrivning.
+
+Hämta: Programräknaren (PC) pekar på adressen för nästa instruktion i programminnet. Instruktionen hämtas och lagras i instruktionsregistret (IR).
+
+Avkoda: CPU:n analyserar instruktionen som är lagrad i IR till en op-kod och eventuella nödvändiga operander.
+
+Execute: Operationen som specificeras av opcoden och operanderna exekveras.
+
+Återskrivning: Resultaten av operationen lagras i minnet eller ett register.
+
+
+
+3.
+
+ .CSEG- och .DSEG-direktiven används i AVR-assembler för att deklarera programmets kod respektive datasegment. 
+ .CSEG-direktivet används för att deklarera segmentet som innehåller programmets kod,
+ och .DSEG-direktivet används för att deklarera segmentet som innehåller datan för programmet.
+ Kodsegmentet innehåller alla instruktioner som CPU:n kommer att exekvera, medan datasegmentet innehåller alla variabler och konstanter som används av programmet.
+ Tillsammans utgör koden och datasegmenten programmets minne.
