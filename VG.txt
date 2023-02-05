@@ -13,12 +13,19 @@ Det har även att göra med att dagens hårdvara innehåller fler CPU register, 
 
 b) Förklara skillnaden mellan nyckelordet auto i C respektive C++.
 
- Auto i C används för att deklarera variabler med automatisk lagringsvaraktighet, medans det i C++ används för att härleda typen av en variabel baserat på dess initialiseringsuttryck.
+ Auto i C används för att deklarera variabler med automatisk lagringsvaraktighet,
+ medans det i C++ används för att härleda typen av en variabel baserat på dess initialiseringsuttryck.
 
 
 c) Förklara vad goto-satsen är i C/C++ samt varför denna sats numera är väldigt sällsynt.
 
-Goto-satsen är en kontrollflödessats i C och C++ som tillåter ett ovillkorligt hopp till en annan punkt i koden. Användningen av goto-satser var populär i tidiga programmeringsspråk men har minskat i popularitet med tiden, eftersom andra sätt att kontrollera flödet (till exempel for, while och if-satser) ger ett mer strukturerat sätt att hantera kontrollflödet och är lättare att förstå. Nedgången i användningen av goto-satser inom C och C++ kan hänföras till utvecklingen av strukturerad programmering, vilket betonar användningen av kontrollstrukturer som är lätta att förstå och underhålla. Goto-statser ses ofta som en källa till komplexitet, svår-hittade buggar och eventuell spaghetti-kod. 
+Goto-satsen är en kontrollflödessats i C och C++ som tillåter ett ovillkorligt hopp till en annan punkt i koden.
+Användningen av goto-satser var populär i tidiga programmeringsspråk men har minskat i popularitet med tiden, 
+eftersom andra sätt att kontrollera flödet (till exempel for, while och if-satser) ger ett mer strukturerat sätt att 
+hantera kontrollflödet och är lättare att förstå. Nedgången i användningen av goto-satser 
+inom C och C++ kan hänföras till utvecklingen av strukturerad programmering, vilket betonar
+användningen av kontrollstrukturer som är lätta att förstå och underhålla. Goto-statser ses 
+ofta som en källa till komplexitet, svår-hittade buggar och eventuell spaghetti-kod. 
 
 
 
@@ -26,17 +33,42 @@ Goto-satsen är en kontrollflödessats i C och C++ som tillåter ett ovillkorlig
 
 
 
-
-
 a) Översätt koden till assemblerkod. Ser du likheter mellan goto-satsen och någon assemblerinstruktion?
+
+    ldi r24, 0
+loop:
+    inc r24
+    cpi r24, 10
+    brne loop
+    ret
+
+Goto-satsen har likheter med rjmp-instruktionen i AVR-assembler, vilket är ett ovillkorligt relativt hopp till en annan plats i koden.
+
 b) Översätt programkoden i till modern C (utan goto-sats).
+
+int main(void)
+{
+    for (uint8_t i = 0; i < 10; i++) {
+    }
+    return 0;
+}
+
 c) Översätt programkoden i till modern C++, använd nyckelordet auto.
+
+int main()
+{
+    for (auto i = 0; i < 10; i++) {
+    }
+    return 0;
+}
+
 d) C-koden skriven i ANSI C kan tänkas vara mer lik assemblerkoden än modern C/C++, där iteratorn i fråga måste
 deklareras innan användning. Hur kommer det sig att detta inte behöver göra detta numera? Medför en modern
 version av C/C++ att iteratorn deklareras annorlunda eller blir maskinkoden samma?
-int main(void)
-{
-register uint8_t i = 0;
-loop:
-if (i++ < 10)
-goto loop;
+
+
+Anledningen att man i modern C / C++ inte behöver deklarera variabler innan man använder dem beror på en funktion som kallas "automatic type inference".
+Kompilatorn kan gissa sig till typen av variabel baserat på värdet man tilldelar den. I ansi C måste typen på en variabel uttryckligen deklareras, vilket gör
+koden mer fyllig. Maskinkoden som genereras av de flesta moderna kompilatorer är oftast optimerad, så det är inte alltid exakt samma som koden i ANSI C.
+Koden bör dock ha samma funktionalitet som den i ANSI C.
+
