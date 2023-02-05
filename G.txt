@@ -13,6 +13,29 @@ Execute: Operationen som specificeras av opcoden och operanderna exekveras.
 
 
 
+2. Förklara vad följande element har för funktion i en CPU:
+a) Programminnet
+
+
+b) Dataminnet
+
+
+c) Programräknaren
+
+
+d) Instruktionsregistret
+
+
+e) CPU-register
+
+
+f) Stacken
+
+
+g) Stackpekaren
+
+
+
 3.
 
  .CSEG- och .DSEG-direktiven används i AVR-assembler för att deklarera programmets kod respektive datasegment. 
@@ -20,3 +43,24 @@ Execute: Operationen som specificeras av opcoden och operanderna exekveras.
  och .DSEG-direktivet används för att deklarera segmentet som innehåller datan för programmet.
  Kodsegmentet innehåller alla instruktioner som CPU:n kommer att exekvera, medan datasegmentet innehåller alla variabler och konstanter som används av programmet.
  Tillsammans utgör koden och datasegmenten programmets minne.
+
+4. Förklara vad som menas med OP-kod och operander. Identifiera OP-kod samt operander i följande instruktioner och
+förklara vad respektive subrutin nedan har för funktion:
+
+subroutine1:
+LDI R24, (1 << 1)
+OUT DDRB, R24
+
+subroutine2:
+IN R24, PORTB
+ORI R24, (1 << 1)
+OUT PORTB, R24
+subroutine3:
+
+IN R24, PORTB
+ANDI R24, ~(1 << 1)
+OUT PORTB, R24
+
+
+
+
