@@ -3,12 +3,22 @@
 
 a) Förklara vad nyckelordet register används för i C respektive C++. Varför är detta nyckelord sällsynt numera?
 
+Register är ett nyckelord vars funktion är att deklarera en variabel till en register variabel, alltså att föreslå för kompilatorn att lägga variabeln i ett s.k CPU register för snabbare tillgång, istället för i dataminnet.
+
+Nyckelordet register används inte särskilt ofta i dagens programmering då det i de flesta fall ändå kommer bli ignorerat av kompilatorn. I simpla termer så
+är dagens kompilatorer tillräckligt smarta, till och med smartare än oss människor i många fall, och därför ignoreras det oftats då kompilatorn vet bättre. 
+
+Det har även att göra med att dagens hårdvara innehåller fler CPU register, så "the need" att specificera en variabel har dött ut. 
+
 
 b) Förklara skillnaden mellan nyckelordet auto i C respektive C++.
+
+ Auto i C används för att deklarera variabler med automatisk lagringsvaraktighet, medans det i C++ används för att härleda typen av en variabel baserat på dess initialiseringsuttryck.
 
 
 c) Förklara vad goto-satsen är i C/C++ samt varför denna sats numera är väldigt sällsynt.
 
+Goto-satsen är en kontrollflödessats i C och C++ som tillåter ett ovillkorligt hopp till en annan punkt i koden. Användningen av goto-satser var populär i tidiga programmeringsspråk men har minskat i popularitet med tiden, eftersom andra sätt att kontrollera flödet (till exempel for, while och if-satser) ger ett mer strukturerat sätt att hantera kontrollflödet och är lättare att förstå. Nedgången i användningen av goto-satser inom C och C++ kan hänföras till utvecklingen av strukturerad programmering, vilket betonar användningen av kontrollstrukturer som är lätta att förstå och underhålla. Goto-statser ses ofta som en källa till komplexitet, svår-hittade buggar och eventuell spaghetti-kod. 
 
 
 
