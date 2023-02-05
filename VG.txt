@@ -1,0 +1,17 @@
+5. Svara på nedanstående frågor gällande C och C++.
+a) Förklara vad nyckelordet register används för i C respektive C++. Varför är detta nyckelord sällsynt numera?
+b) Förklara skillnaden mellan nyckelordet auto i C respektive C++.
+c) Förklara vad goto-satsen är i C/C++ samt varför denna sats numera är väldigt sällsynt.
+6. Nedanstående program är skrivet i ANSI C / C89.
+a) Översätt koden till assemblerkod. Ser du likheter mellan goto-satsen och någon assemblerinstruktion?
+b) Översätt programkoden i till modern C (utan goto-sats).
+c) Översätt programkoden i till modern C++, använd nyckelordet auto.
+d) C-koden skriven i ANSI C kan tänkas vara mer lik assemblerkoden än modern C/C++, där iteratorn i fråga måste
+deklareras innan användning. Hur kommer det sig att detta inte behöver göra detta numera? Medför en modern
+version av C/C++ att iteratorn deklareras annorlunda eller blir maskinkoden samma?
+int main(void)
+{
+register uint8_t i = 0;
+loop:
+if (i++ < 10)
+goto loop;
