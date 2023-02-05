@@ -11,6 +11,91 @@ Execute: Operationen som specificeras av opcoden och operanderna exekveras.
 
 Återskrivning: Resultaten av operationen lagras i minnet eller ett register.
 
+"Demonstrera motsvarande C-kod C för beskrivningen. Använd tre befintliga OP-koder för beskrivningen"
+
+FETCH:
+      case CPU_STATE_FETCH:
+      {
+         ir = program_memory_read(pc); /* Fetches next instruction. */
+         mar = pc;                     /* Stores address of current instruction. */
+         pc++;                         /* Program counter points to next instruction. */
+         state = CPU_STATE_DECODE;     /* Decodes the instruction during next clock cycle. */
+         break;
+      }
+
+DECODE:
+
+  case CPU_STATE_DECODE:
+      {        
+         op_code = ir >> 16;           /* Bit 23 downto 16 consists of the OP code. */
+         op1 = ir >> 8;                /* Bit 15 downto 8 consists of the first operand. */
+         op2 = ir;                     /* Bit 7 downto 0 consists of the second operand. */
+         state = CPU_STATE_EXECUTE;    /* Executes the instruction during next clock cycle. */
+         break;
+}
+
+EXECUTE:
+case CPU_STATE_EXECUTE:
+      {
+         switch (op_code) /* Checks the OP code.*/
+         {
+         case NOP: /* NOP => do nothing. */
+         {
+            break; 
+         }
+         case LDI: /* LDI R16, 0x01 => op_code = LDI, op1 = R16, op2 = 0x01 */
+         {
+            reg[op1] = op2; 
+            break;
+         }
+         case MOV: /* MOV R17, R16 => op_code = MOV, op1 = R17, op2 = R16 */
+         {
+            reg[op1] = reg[op2]; 
+            break;
+         }
+         case OUT: /* OUT DDRB, R16 => op_code = OUT, op1 = DDRB, op2 = R16 */
+         {
+            data_memory_write(op1, reg[op2]); /* Writes to address 0 - 255. */
+            break;
+         }
+         case IN: /* IN R16, PINB => op_code = IN, op1 = R16, op2 = PINB */
+         {
+            reg[op1] = data_memory_read(op2); /* Reads from address 0 - 255. */
+            break;
+         }
+         case STS: /* STS counter, R16 => op_code = STS, op1 = counter, op2 = R16 */
+         {
+            data_memory_write(op1 + 256, reg[op2]); /* Offset 256 => writes to address 256 - 511. */
+            break;
+         }
+         case LDS: /* LDS R16, counter => op_code = LDS, op1 = R16, op2 = counter */
+         {
+            reg[op1] = data_memory_read(op2 + 256); /* Offset 256 => reads from address 256 - 511. */
+            break;
+         }
+         case JMP:
+         {
+            pc = op1; /* JMP 0x05 => op_code = JMP, op1 = 0x05 */
+            break;
+         }
+         default:
+         {
+            control_unit_reset(); /* System reset if error occurs. */
+            break;
+         }
+         }
+
+         state = CPU_STATE_FETCH; /* Fetches next instruction during next clock cycle. */
+         break;
+      }
+      default: /* System reset if error occurs. */
+      {
+         control_unit_reset();
+         break;
+      }
+   }
+   return;
+}
 
 
 2. Förklara vad följande element har för funktion i en CPU:
